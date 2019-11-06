@@ -27,6 +27,17 @@ const MyLayout = ({children}) => {
             api.getAthleteData()
             .then( response => {
                 appActions.updateAthleteData(dispatch , response);
+                api.getAthleteStats(response.id)
+                    .then( responseStats => {
+                        console.log(responseStats);
+                        appActions.updateAthleteStats(dispatch, responseStats);
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    })      
+            })
+            .catch(error=> {
+                console.log(error);
             })
         }
         else {

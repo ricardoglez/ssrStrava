@@ -5,6 +5,7 @@ const initialState = {
     isAuth      : false ,
     isLoading   : false ,
     athleteData : null,
+    athleteStats: null,
     isMounted   : false,
     redirect    : { status: false , path: ''},
     token       : null,

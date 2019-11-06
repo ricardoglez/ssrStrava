@@ -2,6 +2,17 @@ const baseURL = 'https://www.strava.com/'
 import utilities from './utilities';
 
 const api = {
+    getAthleteStats : ( id ) => {
+        return fetch(`https://www.strava.com/api/v3/athletes/${id}/stats`, {
+            method: 'GET',
+            headers: new Headers({
+                'Authorization':`Bearer ${utilities.getLocalToken()}`,
+                'Content-Type': 'application/json',
+              }),
+        }).then( response => {
+            return response.json()
+        })
+    },
     getAuthorization : ( code  ) => {
         const data = {
             client_id:40487,

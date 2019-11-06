@@ -7,8 +7,9 @@ const appReducers = ( state, action ) => {
         case 'updateMounted':
             return {...state, isMounted: action.payload.status }
         case 'updateAthleteData':
-            console.log( 'Update Athlete DAta', action.payload.athleteData );
             return { ...state, athleteData: action.payload.athleteData }
+        case 'updateAthleteStats':
+            return { ...state, athleteStats: action.payload.athleteStats }
         case 'storeToken':
                 utilities.setLocalToken( action.payload.token );
                 return { ...state, token: action.payload.token }
