@@ -1,4 +1,5 @@
 const baseURL = 'https://www.strava.com/'
+import utilities from './utilities';
 
 const api = {
     getAuthorization : ( code  ) => {
@@ -18,11 +19,11 @@ const api = {
             return response.json()
         })
     },
-    getAthleteData: ( token ) => {
+    getAthleteData: (  ) => {
         return fetch('https://www.strava.com/api/v3/athlete', {
             method: 'GET',
             headers: new Headers({
-                'Authorization':`Bearer ${token}`,
+                'Authorization':`Bearer ${utilities.getLocalToken()}`,
                 'Content-Type': 'application/json',
               }),
         }).then( response => {
