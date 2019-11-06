@@ -6,31 +6,13 @@ import Oauth from '../components/Oauth';
 import { AppContext } from '../context/AppContext';
 
 const Index = () => {
-    const [state, dispatch] = useContext(AppContext)
-    let [ isOauth, handleOauth  ] = useState(false); 
-    let [ oauthCode, handleCode  ] = useState(null); 
+    const [state, dispatch] = useContext(AppContext) 
     const router = useRouter();
-    useEffect( () => {
-        console.log(router);
-       if( router.query.hasOwnProperty('code') ){
-        handleOauth(true);
-        handleCode(router.query.code);
-       }
-   }, [] )
+    console.log(router);
    
    return (
        <MyLayout>
-           {
-               isOauth && !state.isAuth 
-               ?
-               <div>
-                   <Oauth code={oauthCode} />
-               </div>
-               :
-                <div>
-                    <Home />
-                </div>
-           }
+            <Home />
        </MyLayout>
     )
 };
