@@ -33,12 +33,12 @@ const a11yProps = (index) => {
   }
 
 const Home = () => {
-    const [value, setValue] = useState(null);
+    const [value, setValue] = useState(1);
     const handleChange = (event, newValue) => {
         setValue(newValue);
       };
     return (
-        <Grid container >
+        <Grid direction='column' container >
             <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
                 <Tab label="Item One" {...a11yProps(0)} />
                 <Tab label="Item Two" {...a11yProps(1)} />
