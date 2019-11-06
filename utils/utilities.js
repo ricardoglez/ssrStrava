@@ -2,6 +2,7 @@ const utilities = {
     getLocalToken: () => {
         try{
             let tk = localStorage.getItem('token');
+            console.log(tk);
             if( tk ){
                 return tk
             }   
@@ -18,7 +19,9 @@ const utilities = {
     },
     setLocalToken: ( tk ) => {
         if( !tk ){
-
+            localStorage.setItem('token', tk);
         }
     }
 }
+
+export default utilities;
