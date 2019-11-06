@@ -1,33 +1,53 @@
 import React, {useContext, useState, useEffect} from 'react';
 import Link from 'next/link';
+import AthleteData from './AthleteData';
 
+import { 
+    Drawer,
+    Button,
+    AppBar,
+    Grid,
+    Typography
+} from '@material-ui/core';
+import {makeStyles} from '@material-ui/core/styles';
 import {AppContext} from '../context/AppContext';
-const linkStyle = {
-    margibnRight:15,
-}
+import {baseStyles} from '../themes/customStyles';
+
 
 const Header = ( ) => {
     const [state,dispatch] = useContext(AppContext);
+    const classes = baseStyles();
+
     return (
-        <div>
-            <Link href='/'>
-                <a style={linkStyle}> Home</a>
-            </Link>
-            <Link href='/about'>
-                <a style={linkStyle}> About</a>
-            </Link>
-            {
-                state.isAuth
-                ?
-                <Link href='/signout'>
-                    <a style={linkStyle}> Sign out</a>
-                </Link>
-                :
-                <Link href='/signin'>
-                    <a style={linkStyle}> Sign in</a>
-                </Link>
-            }
-        </div>
+        <AppBar position='static' className={classes.appBar}>
+            <Grid item xs={state.isAuth ? 8 : 12}>
+                <Button> 
+                    <Link href='/'>
+                        <a className={classes.linkWithoutStyle}> Home</a>
+                    </Link>
+                </Button>
+                <Button>
+                    <Link href='/about'>
+                        <a className={classes.linkWithoutStyle}> About</a>
+                    </Link>
+                </Button>
+                <Button>
+                    {
+                        state.isAuth
+                        ?
+                        
+                        <Link href='/signout'>
+                            <a className={classes.linkWithoutStyle}> Sign out</a>
+                        </Link>
+                        :
+                        <Link href='/signin'>
+                            <a className={classes.linkWithoutStyle}> Sign in</a>
+                        </Link>
+                    }
+                </Button>
+            </Grid>
+            <AthleteData />
+        </AppBar>
     )
 }
 
