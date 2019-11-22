@@ -23,6 +23,9 @@ const baseStyles = makeStyles(theme => {
         },
         textCenter:{
             textAlign:'center',
+        },
+        error:{
+            color:theme.palette.error,
         }
     }
 }); 
