@@ -16,9 +16,8 @@ const Oauth = ({code}) => {
                 const errorA = { status: true, error: response.errors}
                 handleError(errorA);
             }
-            console.log(response);
-            appActions.handleAuthorized(dispatch, true);
             appActions.storeToken(dispatch, response.access_token);
+            appActions.handleAuthorized(dispatch, true);
             Router.push('/');
         })
         .catch( error => {
