@@ -8,8 +8,6 @@ import { AppContext } from '../context/AppContext';
 const Index = () => {
     const [state, dispatch] = useContext(AppContext) 
     const router = useRouter();
-    console.log(router);
-   
    return (
        <MyLayout>
             <Home />
