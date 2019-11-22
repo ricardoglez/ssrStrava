@@ -11,14 +11,15 @@ const utilities = {
             }
         }
         catch(error){
-            throw 'Something break while getting token'
+            console.error(error);
+            return new Error( 'Something break while getting token' )
         }
     },
     removeLocalToken: () => {
         localStorage.removeItem('token');
     },
     setLocalToken: ( tk ) => {
-        if( !tk ){
+        if( tk ){
             localStorage.setItem('token', tk);
         }
     }
