@@ -10,6 +10,8 @@ import api from '../utils/api';
 import appActions from '../actions/appActions';
 import useAuthFromStrava from '../hooks/useAuthFromStrava';
 import Oauth from '../components/Oauth';
+import ErrorBoundary from '../components/ErrorBoundary';
+import ErrorComponent from '../components/ErrorComponent';
 
 const MyLayout = ({children}) => {
     const classes = baseStyles();
@@ -22,7 +24,7 @@ const MyLayout = ({children}) => {
     }
 
     useEffect( () => {
-        if(utilities.getLocalToken()){
+        if(utilities.getLocalToken() ){
             appActions.handleAuthorized(dispatch, true);
             api.getAthleteData()
             .then( response => {
@@ -30,7 +32,16 @@ const MyLayout = ({children}) => {
                 api.getAthleteStats(response.id)
                     .then( responseStats => {
                         console.log(responseStats);
-                        appActions.updateAthleteStats(dispatch, responseStats);
+                        if( responseStats.hasOwnProperty('errors')){
+                            let newError = state.error;
+                            newError.isError =true;
+                            newError.errorMessage = responseStats.message; 
+                            utilities.removeLocalToken();
+                            appActions.handleError( dispatch , newError );
+                        }
+                        else {
+                            appActions.updateAthleteStats(dispatch, responseStats);
+                        }
                     })
                     .catch(error => {
                         console.error(error);
@@ -43,23 +54,36 @@ const MyLayout = ({children}) => {
         else {
             appActions.handleAuthorized(dispatch, false);
         }
-    }, [] );
+    }, [ state.isAuth ] );
 
-
-    return (
-        <div >
-            <Header/>
-            <Grid container align='center' justify='center'>
-                <Grid className={classes.mainContainer} item xs={8}>
-                {
-                  isOauth && !state.isAuth 
-                  ?
-                   <Oauth code={oauthCode} />
-                  :                 
-                   children
-                }
+    if( state.error.isError ){
+        return (
+            <div>
+                <Header/>
+                <Grid container align='center' justify='center'>
+                    <Grid className={classes.mainContainer} item xs={8}>
+                        <ErrorComponent/>
+                    </Grid>
                 </Grid>
-            </Grid>
+            </div>
+        )
+    }
+    return (
+        <div>
+            <ErrorBoundary>
+                <Header/>
+                <Grid container align='center' justify='center'>
+                    <Grid className={classes.mainContainer} item xs={8}>
+                    {
+                    isOauth && !state.isAuth 
+                    ?
+                    <Oauth code={oauthCode} />
+                    :                 
+                    children
+                    }
+                    </Grid>
+                </Grid>
+            </ErrorBoundary>
         </div>
     )
 }
