@@ -17,6 +17,8 @@ const appReducers = ( state, action ) => {
                 return { ...state, isAuth: action.payload.status }
         case 'redirectTo':
                 return { ...state, pathToRedirect: action.payload.pathToRedirect, redirect: action.payload.redirect }
+        case 'handleError':
+                return { ...state, error: action.payload.error }
         default: 
             return { ...state }
     }
