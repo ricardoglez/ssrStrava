@@ -20,6 +20,9 @@ const appActions = {
     },
     handleRedirect: ( dispatch, redirect ) => {
         dispatch( {type: 'redirect',payload:{ redirect } })
+    },
+    handleError: ( dispatch, error ) => {
+        dispatch( {type: 'error',payload:{ error } })
     }
 }
 
