@@ -19,13 +19,17 @@ const baseStyles = makeStyles(theme => {
         },
         avatar:{
             margin:'4pt',
-            backgroundColor:theme.palette.secondary
+            backgroundColor:theme.palette.secondary.dark
         },
         textCenter:{
             textAlign:'center',
         },
         error:{
-            color:theme.palette.error,
+            color:theme.palette.error.light,
+        },
+        map:{
+            width:'800px',
+            height:'400px',
         }
     }
 }); 
