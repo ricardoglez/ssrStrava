@@ -31,7 +31,6 @@ const MyLayout = ({children}) => {
                 appActions.updateAthleteData(dispatch , response);
                 api.getAthleteStats(response.id)
                     .then( responseStats => {
-                        console.log(responseStats);
                         if( responseStats.hasOwnProperty('errors')){
                             let newError = state.error;
                             newError.isError =true;
