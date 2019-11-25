@@ -8,52 +8,28 @@ import {
     Typography,
 } from '@material-ui/core';
 
-const a11yProps = (index) => {
-    return {
-      id: `simple-tab-${index}`,
-      'aria-controls': `simple-tabpanel-${index}`,
-    };
-  };
-
-  const TabPanel = (props) => {
-    const { children, value, index, ...other } = props;
-  
-    return (
-      <Typography
-        component="div"
-        role="tabpanel"
-        hidden={value !== index}
-        id={`simple-tabpanel-${index}`}
-        aria-labelledby={`simple-tab-${index}`}
-        {...other}
-      >
-        <Box p={3}>{children}</Box>
-      </Typography>
-    );
-  }
+import { AppContext } from '../context/AppContext';
+import api from '../utils/api';
+import appActions from '../actions/appActions';
+import ActivitiesList from './ActivitiesList';
 
 const Home = () => {
-    const [value, setValue] = useState(1);
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-      };
+  const [state, dispatch] = useContext(AppContext);
+
+
+  if( state.isAuth){
     return (
-        <Grid direction='column' container >
-            <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-                <Tab label="Item One" {...a11yProps(0)} />
-                <Tab label="Item Two" {...a11yProps(1)} />
-                <Tab label="Item Three" {...a11yProps(2)} />
-            </Tabs>
-            <TabPanel value={value} index={0}>
-                Item One
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                Item Two
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-                Item Three
-            </TabPanel>
-        </Grid>
+      <React.Fragment>
+        <ActivitiesList/>
+      </React.Fragment>
     )
+  } else {
+    return (
+      <div>
+        Please LogIn 
+      </div>
+    )
+  }
+
 }
 export default Home;
