@@ -12,6 +12,12 @@ const appActions = {
     updateAthleteStats : ( dispatch, athleteStats ) => {
         dispatch({ type: 'updateAthleteStats',  payload:{ athleteStats } })
     },
+    updateAthleteRoutes: ( dispatch , athleteRoutes) => {
+        dispatch({ type: 'updateAthleteRoutes',  payload:{ athleteRoutes } })
+    },
+    updateAthleteActivities: ( dispatch , athleteActivities) => {
+        dispatch({ type: 'updateAthleteActivities',  payload:{ athleteActivities } })
+    },
     handleMounted: (dispatch, status ) => {
         dispatch({type: 'handleMounted',payload:{ status } });
     },
