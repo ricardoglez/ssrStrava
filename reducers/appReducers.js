@@ -10,6 +10,10 @@ const appReducers = ( state, action ) => {
             return { ...state, athleteData: action.payload.athleteData }
         case 'updateAthleteStats':
             return { ...state, athleteStats: action.payload.athleteStats }
+        case 'updateAthleteRoutes':
+            return { ...state, athleteRoutes: action.payload.athleteRoutes }
+        case 'updateAthleteActivities':
+            return { ...state, athleteActivities: action.payload.athleteActivities }
         case 'storeToken':
                 utilities.setLocalToken( action.payload.token );
                 return { ...state, token: action.payload.token }
