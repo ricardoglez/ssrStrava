@@ -1,9 +1,9 @@
-const baseURL = 'https://www.strava.com/'
+const baseURL = 'https://www.strava.com/api/v3/'
 import utilities from './utilities';
 
 const api = {
     getAthleteStats : ( id ) => {
-        return fetch(`https://www.strava.com/api/v3/athletes/${id}/stats`, {
+        return fetch(`${baseURL}/athletes/${id}/stats`, {
             method: 'GET',
             headers: new Headers({
                 'Authorization':`Bearer ${utilities.getLocalToken()}`,
@@ -20,7 +20,7 @@ const api = {
             code: code ,
             grant_type: 'authorization_code'
         }
-        return fetch(`${baseURL}oauth/token`, {
+        return fetch(`https://www.strava.com/oauth/token`, {
             method: 'POST',
             body: JSON.stringify(data),
             headers: new Headers({
@@ -31,7 +31,7 @@ const api = {
         })
     },
     getAthleteData: (  ) => {
-        return fetch('https://www.strava.com/api/v3/athlete', {
+        return fetch(`${baseURL}athlete`, {
             method: 'GET',
             headers: new Headers({
                 'Authorization':`Bearer ${utilities.getLocalToken()}`,
@@ -40,7 +40,33 @@ const api = {
         }).then( response => {
             return response.json()
         })
-    }  
+    },
+    getAthleteRoutes:( id ) => {
+        return fetch(`${baseURL}athletes/${id}/routes`, {
+            method: 'GET',
+            headers: new Headers({
+                'Authorization':`Bearer ${utilities.getLocalToken()}`,
+                'Content-Type': 'application/json',
+              }),
+        }).then( response => {
+            return response.json()
+        })
+    },
+    getAthleteActivities:( ) => {
+        const opts = {
+            page: 1,
+            perPage: 50,
+        }
+        return fetch(`${baseURL}athlete/activities?${new URLSearchParams(opts)}`, {
+            method: 'GET',
+            headers: new Headers({
+                'Authorization':`Bearer ${utilities.getLocalToken()}`,
+                'Content-Type': 'application/json',
+              }),
+        }).then( response => {
+            return response.json()
+        })
+    }
 }
 
 export default api;
