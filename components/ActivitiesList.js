@@ -25,12 +25,14 @@ const ListRenderer = ({activities}) => {
 };
 
 const ActivitiesList = () => {
-    const [isLoading, handleLoaded] = useState(false);
     const [isMounted, handleMounted] = useState(false);
     const [state, dispatch] = useContext(AppContext);
 
+
+
     useEffect( () => {
-      if(state.isAuth && state.athleteData && !state.athleteActivities){
+      handleMounted(false);
+        if(state.isAuth && state.athleteData && !state.athleteActivities){
         api.getAthleteActivities( )
         .then( response => {
           appActions.updateAthleteActivities( dispatch, response )
@@ -41,16 +43,19 @@ const ActivitiesList = () => {
           console.error(error);
         })
       }
+      else if(state.athleteActivities) {
+        handleMounted(true);
+      }
     } ,[ state.athleteData ] );
     
 
-    if(!isMounted || isLoading){
+    if(!isMounted){
         return <CircularProgress></CircularProgress>
     }
     else {
         return (
             <React.Fragment>
-               <GMapWrapper/>
+               <GMapWrapper activities={state.athleteActivities}/>
                 <List>
                     <ListRenderer activities={state.athleteActivities}/>
                 </List>
