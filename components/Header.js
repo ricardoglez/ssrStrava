@@ -20,7 +20,7 @@ const Header = ( ) => {
 
     return (
         <AppBar position='static' className={classes.appBar}>
-            <Grid item xs={state.isAuth ? 8 : 12}>
+            <Grid item xs={state.isAuth ? 6 : 12}>
                 <Button> 
                     <Link href='/'>
                         <a className={classes.linkWithoutStyle}> Home</a>
