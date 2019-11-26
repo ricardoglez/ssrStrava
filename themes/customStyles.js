@@ -1,6 +1,9 @@
 import {makeStyles} from '@material-ui/core/styles';
 
 const baseStyles = makeStyles(theme => {
+    console.log( 'Get Window size', global, global );
+    const winSize = {};
+
     return {
         root:{
             flexGrow: 1,
@@ -28,6 +31,7 @@ const baseStyles = makeStyles(theme => {
             color:theme.palette.error.light,
         },
         map:{
+            marginTop:'1em',
             width:'800px',
             height:'400px',
         }
