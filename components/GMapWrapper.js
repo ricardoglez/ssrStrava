@@ -4,9 +4,8 @@ import { Grid, CircularProgress} from '@material-ui/core';
 import {baseStyles} from '../themes/customStyles';
 import gMapsUtils from '../utils/gMapsUtils';
 
-const GMapWrapper = ({ activitiesList }) => {
+const GMapWrapper = ({ activities }) => {
     const [position, setPosition] = useState( null );
-    const [mapIsReady, setMapReady] = useState(false);
     const classes = baseStyles();    
     const map = useRef(null);
 
@@ -17,15 +16,21 @@ const GMapWrapper = ({ activitiesList }) => {
     }, [])
 
     useEffect(() => {
-        console.log('Map tag is ready');
-        let mapObject = gMapsUtils.initMap('map', position);
-        console.log(mapObject); 
-    },[map, position])
+        if( !position ){
+            console.log('Map tag is ready');
+            let mapObject = gMapsUtils.initMap('map', position);
+            console.log(mapObject);
+            console.log(activities); 
+            activities.forEach( a => {
+                gMapsUtils.getHeatMap( gMapsUtils.convertPolylineToLatLng( a.map.summary_polyline ), mapObject );            
+            })
+        }
+    },[map, position]);
 
+    
     return (
         <Grid container direction='row' justify='center' align='center' xs={ 8 }>
-           
-                <div className={classes.map} ref={map} id="map"/>
+            <div className={classes.map} ref={map} id="map"/>
         </Grid>
     )
 }
