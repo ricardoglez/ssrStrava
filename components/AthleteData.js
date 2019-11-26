@@ -14,17 +14,12 @@ import appActions from '../actions/appActions';
 const AthleteData = ({}) => {
     const classes = baseStyles();
     const [state, dispatch] = useContext(AppContext);
-    
-    useEffect( () => {
-       
-    },[] );
-
     if( !state.isAuth || !state.athleteData || !state.athleteStats){
         return null
     }
     return (
-        <Grid item >
-            <Grid container justify="center" alignItems="center">
+        <Grid item xs={6}>
+            <Grid container justify="center"  alignItems="center">
                 <Typography variation='caption'>
                 Hola { state.athleteData.firstname}
                 </Typography>
