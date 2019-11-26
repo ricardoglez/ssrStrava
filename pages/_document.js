@@ -20,7 +20,7 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />
-        <script crossOrigin={true} src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8kZUyV2d7XPDj_g91jW3dnA3C3NY42f8&callback=initMap"
+        <script crossOrigin={true} src={`https://maps.googleapis.com/maps/api/js?key=${process.env.MAPS_API_KEY}&callback=initMap`}
         async defer></script>
         </Head>
         <body>
