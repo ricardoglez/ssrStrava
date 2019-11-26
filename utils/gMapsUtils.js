@@ -11,10 +11,22 @@ const gMapsUtils = {
         else {
             return new google.maps.Map(document.getElementById(selectorId), {
                 center: {lat:19.4537086, lng: -99.1857716},
-                zoom: 8
+                zoom: 12
               });
         }
-        
+    },
+    convertPolylineToLatLng: ( polyline ) => {
+        const opts ={ 
+            strokeColor:'#fff',
+        }
+        return google.maps.geometry.encoding.decodePath( polyline , opts )
+    },
+    getHeatMap:( data, map ) => {
+        var heatmap = new google.maps.visualization.HeatmapLayer({
+            data: data
+          });
+          heatmap.setMap(map);
+          
     }
 }
 
