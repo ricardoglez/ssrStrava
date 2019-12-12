@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core';
 import {AppContext} from '../context/AppContext';
 import GMapWrapper from './GMapWrapper';
+import P5Canvas from './P5Canvas';
 import api from '../utils/api';
 import appActions from '../actions/appActions';
 import gMapsUtils from '../utils/gMapsUtils';
@@ -55,10 +56,7 @@ const ActivitiesList = () => {
     else {
         return (
             <React.Fragment>
-               <GMapWrapper activities={state.athleteActivities}/>
-                <List>
-                    <ListRenderer activities={state.athleteActivities}/>
-                </List>
+              <P5Canvas activities={state.athleteActivities}/>
             </React.Fragment>
         )
     }
